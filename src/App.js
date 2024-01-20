@@ -1,105 +1,38 @@
-// App.js
+import React, { Component, Suspense } from 'react'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import './scss/style.scss'
 
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from './components/Login';
-import AuthService from './services/authService';
-import CategorieService from './services/categorieService';
+const loading = (
+  <div className="pt-3 text-center">
+    <div className="sk-spinner sk-spinner-pulse"></div>
+  </div>
+)
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    element={
-      AuthService.estConnecte() ? (
-        <Component />
-      ) : (
-        <p>Veuillez vous connecter pour accéder à cette page.</p>
-      )
-    }
-  />
-);
+// Containers
+const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
-const Home = () => <h2>Accueil</h2>;
-const About = () => {
-  const [nom, setNom] = useState('');
-  const [categories, setCategories] = useState([]);
-  const handleChange = (event)=> {
-    setNom(event.target.value);
+// Pages
+const Login = React.lazy(() => import('./views/pages/login/Login'))
+const Register = React.lazy(() => import('./views/pages/register/Register'))
+const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
+const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
+
+class App extends Component {
+  render() {
+    return (
+      <HashRouter>
+        <Suspense fallback={loading}>
+          <Routes>
+            <Route exact path="/login" name="Login Page" element={<Login />} />
+            <Route exact path="/register" name="Register Page" element={<Register />} />
+            <Route exact path="/404" name="Page 404" element={<Page404 />} />
+            <Route exact path="/500" name="Page 500" element={<Page500 />} />
+            <Route path="*" name="Home" element={<DefaultLayout />} />
+          </Routes>
+        </Suspense>
+      </HashRouter>
+    )
   }
-  const handleAdd = async ()=>{
-    const result = await CategorieService.ajouter(nom);
-    if (result.success) {
-      fetchData();
-      setNom('');
-    }
-  }
-  const fetchData = async () => {
-    const result = await CategorieService.tous();
-    if (result.success) {
-      setCategories(result.data);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  return (
-    <>
-    
-    <h2>Ajouter une categorie</h2>
-      <input type="text" name='nom' onChange={handleChange} value={nom}/>
-      <button onClick={()=>handleAdd()}>Ajouter</button>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nom</th>
-          </tr>
-        </thead>
-        <tbody>
+}
 
-        {categories.map((categorie, index)=>(
-          <tr key={index}>
-            <td>{categorie.id}</td>
-            <td>{categorie.nom}</td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
-    </>
-  )
-};
-
-const handleLogout=()=> AuthService.deconnection();
-
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Accueil</Link>
-            </li>
-            <li>
-              <Link to="/about">À propos</Link>
-            </li>
-            <li>
-              <Link to="/login">Connexion</Link>
-            </li>
-            <li>
-              <button onClick={handleLogout}>Déconnection</button>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
-  );
-};
-
-export default App;
+export default App
