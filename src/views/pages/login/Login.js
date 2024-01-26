@@ -16,6 +16,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import AuthService from 'src/services/authService'
+import { Navigate } from 'react-router-dom'
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const Login = () => {
     try {
       setLoading(true);
       const result = await AuthService.connection(postData.username, postData.password)
-      if (result.success) alert("Connection réussi");
+      if (result.success) alert("SUCCESS");
       else {
         alert(result.error)
       }

@@ -1,24 +1,23 @@
 import { BACKEND_URL } from "../others/URL";
 
-const URL_MAPPING = {
-    LOG_IN: "/authentification/administrateur"
-} 
+const BASE = BACKEND_URL + "/authentification";
+const ADMIN = BASE + "/administrateur";
 
 
 const AuthService = {
     connection: async (nom, motDePasse) => {
       try {
-        const response = await fetch(BACKEND_URL + URL_MAPPING.LOG_IN, {
+        const response = await fetch(ADMIN, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ nom, motDePasse }),
+          body: JSON.stringify({nom, motDePasse})
         });
   
         if (response.ok) {
           const data = await response.json();
-          localStorage.setItem('accessToken', data.data);
+          localStorage.setItem('accessToken', data.tokens);
           return {success: true};
         } else if (response.status === 401){
           const errorData = await response.json();

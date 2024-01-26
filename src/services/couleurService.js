@@ -1,8 +1,8 @@
 import { BACKEND_URL } from "../others/URL";
 
-const BASE = BACKEND_URL + "/api/v1/categories";
+const BASE = BACKEND_URL + "/api/v1/couleurs";
 
-const CategorieService = {
+const CouleurService = {
   all: async () => {
     try {
       const response = await fetch(BASE, {
@@ -69,7 +69,7 @@ const CategorieService = {
       return {success: false, error: error};
     }
   },
-  add: async (nom) => {
+  add: async (nom, valeur) => {
     try {
       const response = await fetch(BASE, {
           method: 'POST',
@@ -77,7 +77,7 @@ const CategorieService = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         },
-        body: JSON.stringify({"nom": nom})
+        body: JSON.stringify({"nom": nom, "valeur": valeur})
       });
       if (response.ok) {
         return {success: true};
@@ -111,7 +111,7 @@ const CategorieService = {
       return {success: false, error: error};
     }
   },
-  update: async (id, nom) => {
+  update: async (id, nom, valeur) => {
     try {
       const response = await fetch(BASE, {
           method: 'PUT',
@@ -119,7 +119,7 @@ const CategorieService = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
         },
-        body: JSON.stringify({"id": id, "nom": nom})
+        body: JSON.stringify({"id": id, "nom": nom, "valeur": valeur})
       });
       if (response.ok) {
         return {success: true};
@@ -133,5 +133,5 @@ const CategorieService = {
     }
   }
 };
-export default CategorieService;
+export default CouleurService;
   

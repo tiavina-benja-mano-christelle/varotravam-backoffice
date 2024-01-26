@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createRef } from 'react'
 import { CRow, CCol, CCard, CCardHeader, CCardBody, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CTooltip, CPagination, CPaginationItem, CFormLabel } from '@coreui/react'
-import MarqueService from 'src/services/marqueService'
+import CouleurService from 'src/services/couleurService'
 import {
   CListGroup,
   CListGroupItem,
@@ -10,12 +10,13 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilDelete, cilSettings } from '@coreui/icons'
 
-const Marque = () => {
+const Couleur = () => {
   const [page, setPage] = useState(0);
   const [nbPage, setNbPage] = useState(0);
   const [id, setId] = useState(0);
-  const [marque, setMarque] = useState('');
-  const [marques, setMarques] = useState([]);
+  const [couleur, setCouleur] = useState('');
+  const [couleurRGB, setCouleurRGB] = useState('');
+  const [couleurs, setCouleurs] = useState([]);
   const [updating, setUpdating] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
 
@@ -24,20 +25,24 @@ const Marque = () => {
   }, [])
 
   const fetchData=()=>{
-    MarqueService.page(page)
-      .then(result => setMarques(result.data))
+    CouleurService.page(page)
+      .then(result => setCouleurs(result.data))
       .catch(error => alert(error));
-    MarqueService.nbPage()
+    CouleurService.nbPage()
       .then(result => setNbPage(result.data))
       .catch(error => alert(error));
   }
 
   const handleChange=(event)=>{
-    setMarque(event.target.value);
+    setCouleur(event.target.value);
+  }
+
+  const handleChangeRGB=(event)=>{
+    setCouleurRGB(event.target.value);
   }
 
   const handleDelete = (id_p) => {
-    MarqueService.delete(id_p)
+    CouleurService.delete(id_p)
     .then(result => {
       if (result.success) {
         setModalDelete(0);
@@ -48,24 +53,26 @@ const Marque = () => {
     .catch(error => alert(error));
   }
 
-  const handleClickUpdate=(id_p, nom)=>{
+  const handleClickUpdate=(id_p, nom, valeur)=>{
     if (id === id_p) {
       setUpdating(false);
       setId(0);
-      setMarque('');
+      setCouleur('');
+      setCouleurRGB('');
     } else {
       setUpdating(true);
       setId(id_p);
-      setMarque(nom);
+      setCouleur(nom);
+      setCouleurRGB(valeur);
     }
   }
 
   const handleClick=()=>{
     if (updating) {
-      MarqueService.update(id, marque)
+      CouleurService.update(id, couleur, couleurRGB)
       .then(result => {
         if (result.success) {
-          setMarque('');
+          setCouleur('');
           setUpdating(false);
           fetchData();
         } else {
@@ -74,11 +81,13 @@ const Marque = () => {
       })
       .catch(error => alert(error));
     } else {
-      MarqueService.add(marque)
+      CouleurService.add(couleur, couleurRGB)
       .then(result => {
         if (result.success) {
-          setMarque('');
+          setCouleur('');
           fetchData();
+        } else {
+          alert(result.error)
         }
       })
       .catch(error => alert(error));
@@ -87,8 +96,8 @@ const Marque = () => {
 
   const handleChangePage = (page_p)=>{
     setPage(page_p)
-    MarqueService.page(page_p)
-      .then(result => setMarques(result.data))
+    CouleurService.page(page_p)
+      .then(result => setCouleurs(result.data))
       .catch(error => alert(error));
   }
 
@@ -97,13 +106,16 @@ const Marque = () => {
       <CRow>
         <CCol xs={4}>
           <CCard className="mb-4">
-            <CCardHeader>Ajout d'une nouvelle marque</CCardHeader>
+            <CCardHeader>Ajout d'une nouvelle couleur</CCardHeader>
             <CCardBody>
               <CRow>
                 <CCol xs={12}>
                   <CCardBody>
-                    <CFormLabel htmlFor="marque-input">Marques</CFormLabel>
-                    <CFormInput id='marque-input' placeholder="Nouvelle marque" aria-label="Marque" value={marque} onChange={handleChange}/>
+                    <CFormLabel htmlFor="couleur-input">Couleurs</CFormLabel>
+                    <CFormInput id='couleur-input' placeholder="Nouvelle couleur" aria-label="Couleur" value={couleur} onChange={handleChange}/>
+                    
+                    <CFormLabel htmlFor="couleur-input">RGB</CFormLabel>
+                    <CFormInput type='color' id='couleur-input' style={{ width: "100%" }}placeholder="Nouvelle couleur" aria-label="Couleur" value={couleurRGB} onChange={handleChangeRGB}/>
                     <CRow className="align-items-center mt-3">
                       <CCol>
                         <CButton color={updating ? "warning" : "primary"} active={true} onClick={()=>handleClick()} style={{width:'100%'}}>
@@ -121,46 +133,49 @@ const Marque = () => {
         </CCol>
         <CCol xs={8}>
           <CCard className="mb-4" >
-            <CCardHeader>Listes des marques</CCardHeader>
+            <CCardHeader>Listes des couleurs</CCardHeader>
             <CCardBody>
               <CListGroup>
-                <CListGroupItem active>Marque de voiture</CListGroupItem>
-                {marques.map((marque, index)=>
+                <CListGroupItem active>Couleur de voiture</CListGroupItem>
+                {couleurs.map((couleur, index)=>
                 <CListGroupItem key={index}>
                   <CRow>
-                    <CCol xs={10} style={{marginTop:'10px'}}>{marque.nom}</CCol>
+                    <CCol xs={3} style={{marginTop:'10px'}}>{couleur.nom}</CCol>
+                    <CCol xs={7} style={{marginTop:'10px'}}>
+                      <div style={{padding: '10px', background: couleur.valeur}}></div>
+                    </CCol>
                     <CCol xs={2}>
                     <CTooltip
                       content="Mettre à jour"
                     >
-                      <CButton color="info" active={true} onClick={()=>handleClickUpdate(marque.id, marque.nom)}><CIcon icon={cilSettings} /></CButton>
+                      <CButton color="info" active={true} onClick={()=>handleClickUpdate(couleur.id, couleur.nom, couleur.valeur)}><CIcon icon={cilSettings} /></CButton>
                     </CTooltip>
                     <CTooltip
                       content="supprimer"
                     >
-                      <CButton color="danger" active={true} onClick={()=>setModalDelete(marque.id)}><CIcon icon={cilDelete}/></CButton>
+                      <CButton color="danger" active={true} onClick={()=>setModalDelete(couleur.id)}><CIcon icon={cilDelete}/></CButton>
                     </CTooltip>
                     </CCol>
-                    <CModal visible={modalDelete==marque.id} onClose={() => setModalDelete(0)}>
+                    <CModal visible={modalDelete==couleur.id} onClose={() => setModalDelete(0)}>
                       <CModalHeader>
                         <CModalTitle>Confirmation de suppression</CModalTitle>
                       </CModalHeader>
                       <CModalBody>
-                        Vous êtes sur le point de supprimer la marque "<strong>{marque.nom}</strong>"<br />
+                        Vous êtes sur le point de supprimer la couleur "<strong>{couleur.nom}</strong>"<br />
                         Aucun retour en arrière n'est possible.<br />
-                        Êtes-vous sûr de vouloir supprimer "<strong>{marque.nom}</strong>" pour toujours<br />
+                        Êtes-vous sûr de vouloir supprimer "<strong>{couleur.nom}</strong>" pour toujours<br />
                       </CModalBody>
                       <CModalFooter>
                         <CButton color="secondary" onClick={() => setModalDelete(0)}>
                           Close
                         </CButton>
-                        <CButton color="danger" onClick={()=> handleDelete(marque.id)}>Supprimer</CButton>
+                        <CButton color="danger" onClick={()=> handleDelete(couleur.id)}>Supprimer</CButton>
                       </CModalFooter>
                     </CModal>
                   </CRow>
                 </CListGroupItem>
                 )}
-                <CPagination aria-label="Page navigation example" className="justify-content-center">
+                <CPagination aria-label="Page navigation example" className="justify-content-center" >
                   <CPaginationItem onClick={()=>handleChangePage(page - 1)} disabled={page === 0} aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </CPaginationItem>
@@ -181,4 +196,4 @@ const Marque = () => {
     </>
   )
 }
-export default Marque
+export default Couleur

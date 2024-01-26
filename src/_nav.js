@@ -48,6 +48,18 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Couleur',
+    to: '/voiture/couleur',
+    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Equipement',
+    to: '/voiture/equipement',
+    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Modele',
     to: '/voiture/Model',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
@@ -73,6 +85,12 @@ const _nav = [
   {
     component: CNavTitle,
     name: 'Statistiques',
+  },
+  {
+    component: CNavItem,
+    name: 'Stat  ',
+    to: '/stats',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,

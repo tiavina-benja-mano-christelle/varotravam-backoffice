@@ -1,8 +1,8 @@
 import { BACKEND_URL } from "../others/URL";
 
-const BASE = BACKEND_URL + "/api/v1/categories";
+const BASE = BACKEND_URL + "/api/v1/equipements";
 
-const CategorieService = {
+const EquipementService = {
   all: async () => {
     try {
       const response = await fetch(BASE, {
@@ -133,5 +133,5 @@ const CategorieService = {
     }
   }
 };
-export default CategorieService;
+export default EquipementService;
   

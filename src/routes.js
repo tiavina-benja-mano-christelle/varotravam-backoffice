@@ -6,10 +6,13 @@ const DetailsVoiture = React.lazy(() => import('./views/voiture/DetailsVoiture')
 const Historique = React.lazy(() => import('./views/voiture/Historique'))
 const Categorie = React.lazy(() => import('./views/voiture/Categorie'))
 const Marque = React.lazy(() => import('./views/voiture/Marque'))
-const Model = React.lazy(() => import('./views/voiture/Model'))
+const Model = React.lazy(() => import('./views/voiture/Modele'))
 const Energie = React.lazy(() => import('./views/voiture/Energie'))
 const Transmission = React.lazy(() => import('./views/voiture/Transmission'))
 const Freinage = React.lazy(() => import('./views/voiture/Freinage'))
+const Equipement = React.lazy(() => import('./views/voiture/Equipement'))
+const Couleur = React.lazy(() => import('./views/voiture/Couleur'))
+const Stat = React.lazy(() => import('./views/voiture/Stat'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -70,6 +73,9 @@ const routes = [
   { path: '/voiture/energie', name: 'Energie', element: Energie},
   { path: '/voiture/transmission', name: 'Transmission', element: Transmission},
   { path: '/voiture/freinage', name: 'Freinage', element: Freinage},
+  { path: '/voiture/equipement', name: 'Freinage', element: Equipement},
+  { path: '/voiture/couleur', name: 'Couleur', element: Couleur},
+  { path: '/stats', name: 'Statistique', element: Stat},
 
   
   { path: '/base', name: 'Base', element: Cards, exact: true },
