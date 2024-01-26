@@ -1,5 +1,5 @@
-export const BACKEND_URL = "https://varotravam-backend-production.up.railway.app";
+export const BACKEND_URL = "https://varotravam-bg2xwzuf.b4a.run";
 
 // https://varotravam-bg2xwzuf.b4a.run
-// varotravam-backend-production.up.railway.app
+// https://varotravam-backend-production.up.railway.app
 // http://localhost:8080
