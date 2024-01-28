@@ -16,6 +16,16 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 const _nav = [
   {
     component: CNavTitle,
+    name: 'Statistiques',
+  },
+  {
+    component: CNavItem,
+    name: 'Stat  ',
+    to: '/stats',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
     name: 'Annonce',
   },
   {
@@ -23,12 +33,6 @@ const _nav = [
     name: 'En attente',
     to: '/voiture/Attente',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Historique',
-    to: '/voiture/Historique',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
@@ -81,29 +85,7 @@ const _nav = [
     name: 'Transmission',
     to: '/voiture/transmission',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'Statistiques',
-  },
-  {
-    component: CNavItem,
-    name: 'Stat  ',
-    to: '/stats',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Dashboard  ',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Chart graphique',
-    to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  },
+  }
 ]
 
 export default _nav

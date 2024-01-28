@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../others/URL";
+import AuthService from "./authService";
 
 const BASE = BACKEND_URL + "/api/v1/stats";
 const COMMISSION = BASE + "/commission";
@@ -14,7 +15,6 @@ const MEILLEUR_MARQUE_VENDUE_ONE = BASE + "/marque";
 const GRAPHE_CHIFFRE_AFFAIRE = BASE + "/graphe-chiffre-affaire";
 const CHIFFRE_AFFAIRE = BASE + "/chiffre-affaire";
 
-
 const StatistiqueService = {
     all: async() => {
         try {
@@ -28,6 +28,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -50,6 +51,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -72,6 +74,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -94,6 +97,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -116,6 +120,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -138,6 +143,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -160,6 +166,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -182,6 +189,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -204,6 +212,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -227,6 +236,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -249,6 +259,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -271,6 +282,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -293,6 +305,7 @@ const StatistiqueService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();

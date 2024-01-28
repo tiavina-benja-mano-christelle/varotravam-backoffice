@@ -83,7 +83,8 @@ const Colors = () => {
           <CTable striped>
             <CTableHead>
               <CTableRow>
-                <CTableHeaderCell scope="col">#Client</CTableHeaderCell>
+                <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Client</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Date</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Modele</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Marque</CTableHeaderCell>
@@ -98,22 +99,11 @@ const Colors = () => {
               <CTableRow key={index}>
                 <CTableHeaderCell scope="row">{index+1}</CTableHeaderCell>
                 <CTableDataCell>{annonce.proprietaire.nom}({annonce.proprietaire.email})</CTableDataCell>
+                <CTableDataCell>{annonce.datePublication}</CTableDataCell>
                 <CTableDataCell>{annonce.vehicule.modele}</CTableDataCell>
                 <CTableDataCell>{annonce.vehicule.marque}</CTableDataCell>
                 <CTableDataCell>{annonce.vehicule.categorie}</CTableDataCell>
                 <CTableDataCell>{annonce.prixInitial.toLocaleString()} AR</CTableDataCell>
-                <CTableDataCell>
-                  <CButton color="success" active={true}  style={{  background: 'red' ,color : 'white' , border: 'none'}}>
-                    <Link to={`/voiture/detail/${annonce.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      refuser
-                    </Link>
-                  </CButton>
-                  <CButton color="success" active={true}  style={{  background: 'blue' ,color : 'white' , marginLeft : '5px' , border: 'none'}}>
-                    <Link to="/voiture/detail" style={{ color: 'inherit', textDecoration: 'none' }}>
-                      valider
-                    </Link>
-                  </CButton>
-                </CTableDataCell>
                 <CTableDataCell>
                   <CButton color="success" active={true}>
                     <Link to={`/voiture/detail/${annonce.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>

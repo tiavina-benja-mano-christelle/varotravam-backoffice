@@ -1,4 +1,4 @@
-export const BACKEND_URL = "https://varotravam-bg2xwzuf.b4a.run";
+export const BACKEND_URL = "http://localhost:8080";
  
 // https://varotravam-bg2xwzuf.b4a.run
 // https://varotravam-backend-production.up.railway.app

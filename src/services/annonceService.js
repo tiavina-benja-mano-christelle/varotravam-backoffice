@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../others/URL"
+import AuthService from "./authService";
 
 const BASE = BACKEND_URL + "/api/v1/annonces";
 const EN_ATTENTE = BASE + "/en-attente";
@@ -19,6 +20,7 @@ const AnnonceService = {
                 const result = await response.json();
                 return {success: true, data: result.data};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -59,12 +61,12 @@ const AnnonceService = {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
                 },
-                body: annonceId
+                body: JSON.stringify({id: annonceId})
             });
             if (response.ok) {
-                const result = await response.json();
-                return {success: true, data: result.data};
+                return {success: true};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
@@ -86,9 +88,9 @@ const AnnonceService = {
                 body: JSON.stringify({id, observation})
             });
             if (response.ok) {
-                const result = await response.json();
-                return {success: true, data: result.data};
+                return {success: true};
             } else if (response.status === 401){
+                AuthService.deconnection();
                 return {success: false, error: "Non autorisé"}
             } else {
                 const errorData = await response.json();
