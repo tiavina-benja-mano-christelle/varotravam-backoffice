@@ -11,6 +11,7 @@ const AuthService = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://varotravam-admin.netlify.app'
           },
           body: JSON.stringify({nom, motDePasse})
         });
