@@ -67,6 +67,7 @@ const StatWidget=()=>{
                     <CChartLine
                     className="mt-3 mx-3"
                     style={{ height: '70px' }}
+                    data={[]}
                     />
                 }
                 />
@@ -88,6 +89,7 @@ const StatWidget=()=>{
                     <CChartLine
                     className="mt-3 mx-3"
                     style={{ height: '70px' }}
+                    data={[]}
                     />
                 }
                 />
@@ -110,6 +112,7 @@ const StatWidget=()=>{
                     <CChartLine
                     className="mt-3"
                     style={{ height: '70px' }}
+                    data={[]}
                     />
                 }
                 />
@@ -128,6 +131,7 @@ const StatWidget=()=>{
                     <CChartBar
                     className="mt-3 mx-3"
                     style={{ height: '70px' }}
+                    data={[]}
                     />
                 }
                 />

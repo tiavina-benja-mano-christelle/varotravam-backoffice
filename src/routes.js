@@ -1,5 +1,6 @@
 import React from 'react'
 
+const Stat = React.lazy(() => import('./views/voiture/Stat'))
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/voiture/Attente'))
 const DetailsVoiture = React.lazy(() => import('./views/voiture/DetailsVoiture'))
@@ -12,7 +13,6 @@ const Transmission = React.lazy(() => import('./views/voiture/Transmission'))
 const Freinage = React.lazy(() => import('./views/voiture/Freinage'))
 const Equipement = React.lazy(() => import('./views/voiture/Equipement'))
 const Couleur = React.lazy(() => import('./views/voiture/Couleur'))
-const Stat = React.lazy(() => import('./views/voiture/Stat'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))

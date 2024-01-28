@@ -1,11 +1,14 @@
+import { CButton, CFormInput, CFormLabel, CFormTextarea } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AnnonceService from 'src/services/annonceService';
 import '../../assets/css/DetailsVoiture.css';
 
 
 function DetailsVoiture() {
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [observation, setObservation] = useState('');
   const [data, setData] = useState(null);
   useEffect(()=>{
     fetchData();
@@ -18,15 +21,26 @@ function DetailsVoiture() {
     })
   }
 
-  // const data = {
-  //   marque: "Mercedes", modele: "C63", kilometrage: "20 000km", puissance: "300 CV", place: 5,
-  //   porte: 4, consommation: "8 L/100km", etat_vehicule: "9", transmission: "9",
-  //   energie: "Essence", categorie: "Sedan", freinage: "7", couleur: "Noir",
-  //   equipements: "Climatisation, GPS, Caméra de recul", images: '',
-  //   annonce_id: 1, prix_initial: 25000, date_publication: "2024-01-12", date_fermeture: "2024-02-12",
-  //   etat_annonce: "Disponible", description: "Une superbe voiture Mercedes-Benz C63 de l'année 2017 en excellent état.",
-  //   utilisateur_id: 1
-  // };
+  const handleValidate=()=>{
+    AnnonceService.validationAnnonce(id)
+    .then(result => {
+      if(result.success) {
+        navigate("/voiture/attente");
+      }
+    })
+    .catch(error => console.log(error));
+  }
+
+  const handleRefuse=()=>{
+    AnnonceService.refuseAnnonce(id, observation)
+    .then(result => {
+      if(result.success) {
+        navigate("/voiture/attente");
+      }
+    })
+    .catch(error => console.log(error));
+  }
+
   if (data == null) return (<h1>Annonce not found</h1>);
   else {
     return (
@@ -66,11 +80,11 @@ function DetailsVoiture() {
             <div className="model">
               <div className="details-model">
                 <p className="head-model">Puissance</p>
-                <p className="type-model">{data.vehicule.puissance}</p>
+                <p className="type-model">{data.vehicule.puissance} CV</p>
               </div>
               <div className="details-model">
                 <p className="head-model">Consommation</p>
-                <p className="type-model">{data.vehicule.consommation}</p>
+                <p className="type-model">{data.vehicule.consommation} L/100Km</p>
               </div>
             </div>
 
@@ -107,11 +121,13 @@ function DetailsVoiture() {
 
             <div className="contact">
               <span className="prix">{data.prixInitial.toLocaleString()} Ariary</span>
-              <a href="#" className="contacter">Valider</a>
+              <CButton onClick={()=>handleValidate()} className="contacter" color='success'>Valider</CButton>
             </div>
             <div className="contact">
-              <span className="prix"></span>
-              <a href="#" className="refuser">Refuser</a>
+              <span className="prix">
+                <CFormTextarea onChange={()=>setObservation(event.target.value)}/>
+              </span>
+              <a onClick={()=>handleRefuse()} className="refuser" color='danger'>Refuser</a>
             </div>
 
           </div>

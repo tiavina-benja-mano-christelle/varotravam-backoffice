@@ -16,7 +16,7 @@ const StatChiffreAffaire=()=>{
     }, [])
 
     const fetchData= (annee = 2024)=>{
-        StatistiqueService.utilisateurs(annee)
+        StatistiqueService.grapheChiffreAffaire(annee)
         .then(result => {
             if(result.success) {
                 setData(result.data);
