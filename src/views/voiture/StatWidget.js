@@ -10,7 +10,7 @@ const StatWidget=()=>{
     const [nbUtilisateurTotal, setNbUtilisateurTotal] = useState(26000);
     const [mostSelledMarque, setMostSelledMarque] = useState({id: 1, nom: "", nbVente: ''});
     const [mostSelledModele, setMostSelledModele] = useState({id: 1, nom: "NISSAN", marque: 'TOYOTA', nbVente: 20});
-    const [commission, setCommission] = useState(20);
+    const [commission, setCommission] = useState({id: 0, valeur: 20});
     const [chiffreAffaire, setChiffreAffaire] = useState(20000000);
 
     const fetchData=()=>{
@@ -123,7 +123,7 @@ const StatWidget=()=>{
                 color="danger"
                 value={
                     <>
-                        {commission}%
+                        {commission.valeur}%
                     </>
                 }
                 title="Commission actuelle"
