@@ -14,6 +14,7 @@ import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
 import navigation from '../_nav'
+import { rgbToHex } from '@coreui/utils'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -30,8 +31,9 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <h1>
+          OK<span style={{color: "blue"}}>az</span>
+        </h1>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

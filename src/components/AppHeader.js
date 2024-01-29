@@ -14,7 +14,6 @@ import {
 import CIcon from '@coreui/icons-react';
 import { cilMenu, cilPowerStandby } from '@coreui/icons';
 
-import { logo } from 'src/assets/brand/logo';
 import AuthService from 'src/services/authService';
 
 const AppHeader = () => {
@@ -37,7 +36,7 @@ const AppHeader = () => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
+          OKaz
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>

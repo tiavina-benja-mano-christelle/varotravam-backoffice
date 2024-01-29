@@ -88,7 +88,6 @@ const Stat = () => {
         </CCol>
       </CRow>
       <StatChiffreAffaire />
-      <StatBestSeller />
     </>
   )
 }
