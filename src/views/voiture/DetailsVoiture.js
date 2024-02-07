@@ -55,7 +55,7 @@ function DetailsVoiture() {
             <div className="autreImage">
               {data.vehicule.images.map((image, index) => 
                 <img src={`${image}?alt=media`} key={index} className="img"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px', zIndex: 1 }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px', zIndex: 1 , marginLeft:'5px'}}
                 />
               )}
             </div>
