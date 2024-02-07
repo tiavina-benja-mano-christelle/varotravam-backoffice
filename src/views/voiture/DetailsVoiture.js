@@ -48,10 +48,15 @@ function DetailsVoiture() {
         <div className="details-annonces-container py-4">
           <div className="images">
             <div className="image">
+            <img src={`${data.vehicule.images[0]}?alt=media`} className="img"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px', zIndex: 1 }}
+                />
             </div>
             <div className="autreImage">
               {data.vehicule.images.map((image, index) => 
-                <img src={`${image}?alt=media`} key={index} className="img"/>
+                <img src={`${image}?alt=media`} key={index} className="img"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px', zIndex: 1 }}
+                />
               )}
             </div>
             <br />
